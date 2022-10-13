@@ -168,10 +168,10 @@ function generatePassword() {
     for (i = 0; i < questions.length; i++) {
       questions[i]();
     }
-    console.log(lowerCase);
-    console.log(upperCase);
-    console.log(numbers);
-    console.log(special);
+    // if (questions[0] = false) {
+    //   console.log("lowerCase is false");
+    // } else {
+    // }
 
     //4 outcomes where special always true
     //broken, but may revisit
