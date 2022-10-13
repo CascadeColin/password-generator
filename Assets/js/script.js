@@ -30,6 +30,11 @@ function generatePassword() {
   let upperCase = false;
   let numbers = false;
   let special = false;
+  //blank array that will be modified based on user inputs
+  let userPassword = [""];
+
+  //array called in for loop to ask the user questions one at a time
+  let questions = [askLower, askUpper, askNumbers, askSpecial];
 
   // functions placed into "questions" array to prompt user with for loop.  if ok, use char set, else don't use char set
   function askLower (){
@@ -61,25 +66,24 @@ function generatePassword() {
     }
   }
 
-  //array called in for loop to ask the user questions one at a time
-  let questions = [askLower, askUpper, askNumbers, askSpecial];
-
   //user confirms if they want to use char set.  true = include, false = exclude.  clicking "ok" sets true.
   if (window.confirm("Would you like to generate a new password?")) {
     //user confirms if they want to use char set.  true = include, false = exclude.  clicking "ok" sets true.
     for (i = 0; i < questions.length; i++) {
       questions[i]();
     }
+    //ask users for length of password (8 to 128) via prompt
+    //user inputs a number between 8 and 128.  This becomes the length of userPassword array.  Then, run a for loop of a concat array containing the lists that the user specified such as "concatArray(math.floor(math.random()*concatArray.length)", looping that until userPassword.length is reached.  Store results in userPassword[] and convert to a string using toString().
+    
+    //validate user input and verify at least one chars selected, else close program
+    //create password and link it to provided code
   }
 }
 
 
      
-    //ask if user wants charsUpperCase, else exclude via confirm
-    //ask if user wants charsNumbers, else exclude via confirm
-    //ask if user wants charsSpecial, else exclude via confirm
-    //ask users for length of password (8 to 128) via prompt
-    //validate user input and verify at least one chars selected, else close program
-    //create password and link it to provided code
+    
+    
+    
   
 
