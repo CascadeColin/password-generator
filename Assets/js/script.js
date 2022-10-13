@@ -72,6 +72,36 @@ function generatePassword() {
     for (i = 0; i < questions.length; i++) {
       questions[i]();
     }
+    //4 outcomes where special always true
+    if ((lowerCase = true) && (upperCase = true) && (numbers = true) && (special = true)) {
+      //concat all arrays
+    } else if ((lowerCase = false) && (upperCase = true) && (numbers = true) && (special = true)) {
+      //concat all but lowerCase
+    } else if ((lowerCase = false) && (upperCase = false) && (numbers = true) && (special = true)) {
+      //concat all but lowerCase
+    } else if ((lowerCase = false) && (upperCase = false) && (numbers = false) && (special = true)) {
+      //concat all but lowerCase
+    } 
+    //4 outcomes where numbers always true
+      else if ((lowerCase = false) && (upperCase = false) && (numbers = true) && (special = false)) {
+      //concat all but lowerCase
+    } 
+    // outcomes where upperCase always true
+      else if ((lowerCase = false) && (upperCase = true) && (numbers = false) && (special = true)) {
+      //concat all but lowerCase
+    } else if ((lowerCase = false) && (upperCase = true) && (numbers = false) && (special = false)) {
+      //concat all but lowerCase
+    } 
+    // outcomes where lowerCase always true
+      else if ((lowerCase = true) && (upperCase = false) && (numbers = true) && (special = true)) {
+      //concat all arrays
+    } else if ((lowerCase = true) && (upperCase = false) && (numbers = false) && (special = true)) {
+      //concat all but lowerCase
+    } else if ((lowerCase = true) && (upperCase = false) && (numbers = false) && (special = false)) {
+      //concat all but lowerCase
+    }
+    //10 outcomes, do the math to verify accuracy of 4 unique items with 2 outcomes being 10 results
+
     //ask users for length of password (8 to 128) via prompt
     //user inputs a number between 8 and 128.  This becomes the length of userPassword array.  Then, run a for loop of a concat array containing the lists that the user specified such as "concatArray(math.floor(math.random()*concatArray.length)", looping that until userPassword.length is reached.  Store results in userPassword[] and convert to a string using toString().
     
