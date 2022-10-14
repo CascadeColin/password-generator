@@ -165,6 +165,24 @@ function generatePassword() {
       special = false;
     }
   }
+  // Knuth shuffle as found at https://stackoverflow.com/questions/2450954/how-to-randomize-shuffle-a-javascript-array
+  function shuffle(array) {
+    let currentIndex = array.length,
+      randomIndex;
+    // While there remain elements to shuffle.
+    while (currentIndex != 0) {
+      // Pick a remaining element.
+      randomIndex = Math.floor(Math.random() * currentIndex);
+      currentIndex--;
+
+      // And swap it with the current element.
+      [array[currentIndex], array[randomIndex]] = [
+        array[randomIndex],
+        array[currentIndex],
+      ];
+    }
+    return array;
+  }
 
   //user confirms if they want to use char set.  true = include, false = exclude.  clicking "ok" sets true.
   if (window.confirm("Would you like to generate a new password?")) {
@@ -172,7 +190,18 @@ function generatePassword() {
     for (i = 0; i < questions.length; i++) {
       questions[i]();
     }
+    //check to make sure user selected at least one char set
+    if (userPassword.length === 0) {
+      window.alert(
+        "You must select at least one character set.  Please try again!"
+      );
+    } else {
+    }
     console.log(userPassword);
+    shuffle(userPassword);
+    console.log(userPassword);
+    //randomize the contents of userPassword
+
     let passLengthString = prompt(
       "Please enter the number of characters to use in your password (between 8 and 128)."
     );
@@ -181,16 +210,24 @@ function generatePassword() {
     console.log(typeof passLength);
     console.log(passLength);
 
-    if ((8 <= passLength) && (128 >= passLength)) {
+    if (8 <= passLength && 128 >= passLength) {
       //continue with the process
       console.log(passLength);
       window.alert("correct length");
+      //doubles the length of userPassword if user wants more characters than is available, then randomizes it
+      if (passLength > userPassword.length) {
+        userPassword = userPassword.concat(userPassword);
+        shuffle(userPassword);
+        console.log(userPassword);
+      } else {
+      }
     } else {
-      window.alert("You selected an invalid password length.  Please try again!");
-      generatePassword();
+      window.alert(
+        "You selected an invalid password length.  Please try again!"
+      );
     }
+    //randomize userPassword
 
-    //ask users for length of password (8 to 128) via prompt
     //user inputs a number between 8 and 128.  This becomes the length of userPassword array.  Then, run a for loop of a concat array containing the lists that the user specified such as "concatArray(math.floor(math.random()*concatArray.length)", looping that until userPassword.length is reached.  Store results in userPassword[] and convert to a string using toString().
 
     //validate user input and verify at least one chars selected, else close program
