@@ -15,13 +15,6 @@ generateBtn.addEventListener("click", writePassword);
 
 function generatePassword() {
   /////////////////////////// WRITE YOUR CODE HERE /////////////////////////
-
-  // 1) series of prompts for password criteria
-  // 2) prompt for length of password (8 to 128 chars)
-  // 3) prompt for lowercase, uppercase, numeric, and special chars
-  // 4) confirm selections with user
-  // 5) generate password
-
   let charsLowerCase = [
     "a",
     "b",
@@ -116,6 +109,7 @@ function generatePassword() {
   let special = false;
   //blank array that will be modified based on user inputs
   let userPassword = [];
+  let pass;
 
   //array called in for loop to ask the user questions one at a time
   let questions = [askLower, askUpper, askNumbers, askSpecial];
@@ -197,28 +191,24 @@ function generatePassword() {
       );
     } else {
     }
-    console.log(userPassword);
-    shuffle(userPassword);
-    console.log(userPassword);
-    //randomize the contents of userPassword
 
+    //random sort using Knuth method
+    shuffle(userPassword);
     let passLengthString = prompt(
       "Please enter the number of characters to use in your password (between 8 and 128)."
     );
+
     //converts string to a useable number
     let passLength = Number(passLengthString);
-    console.log(typeof passLength);
-    console.log(passLength);
-
+    
     if (8 <= passLength && 128 >= passLength) {
-      //continue with the process
-      console.log(passLength);
       window.alert("correct length");
       //doubles the length of userPassword if user wants more characters than is available, then randomizes it
       if (passLength > userPassword.length) {
         userPassword = userPassword.concat(userPassword);
+        //random sort using Knuth method
         shuffle(userPassword);
-        console.log(userPassword);
+        
       } else {
       }
     } else {
@@ -226,108 +216,14 @@ function generatePassword() {
         "You selected an invalid password length.  Please try again!"
       );
     }
-    //randomize userPassword
-
-    //user inputs a number between 8 and 128.  This becomes the length of userPassword array.  Then, run a for loop of a concat array containing the lists that the user specified such as "concatArray(math.floor(math.random()*concatArray.length)", looping that until userPassword.length is reached.  Store results in userPassword[] and convert to a string using toString().
-
-    //validate user input and verify at least one chars selected, else close program
-    //create password and link it to provided code
+    userPassword.length = passLength;
+    //new values
+    console.log("adj passLength #: " + passLength);
+    console.log("adj userPassword array length: " + userPassword.length);
+    pass = userPassword.join('');
+    console.log(pass);
+    return pass;
   } else {
     window.alert('Click on "Generate Password" if you change your mind.');
   }
 }
-
-//storage for code that may/may not be dead
-
-//4 outcomes where special always true
-//broken, but may revisit
-// if (
-//   (lowerCase = true) &&
-//   (upperCase = true) &&
-//   (numbers = true) &&
-//   (special = true)
-// ) {
-//   userPassword = charsLowerCase.concat(charsUpperCase, numbers, special);
-//   window.alert(userPassword);
-// } else if (
-//   (lowerCase = false) &&
-//   (upperCase = true) &&
-//   (numbers = true) &&
-//   (special = true)
-// ) {
-//   userPassword = userPassword.concat(charsUpperCase, numbers, special);
-//   window.alert(userPassword);
-// } else if (
-//   (lowerCase = false) &&
-//   (upperCase = false) &&
-//   (numbers = true) &&
-//   (special = true)
-// ) {
-//   userPassword = userPassword.concat(numbers, special);
-//   window.alert(userPassword);
-// } else if (
-//   (lowerCase = false) &&
-//   (upperCase = false) &&
-//   (numbers = false) &&
-//   (special = true)
-// ) {
-//   userPassword = charsSpecial;
-//   window.alert(userPassword);
-// }
-// //4 outcomes where numbers always true
-//   else if (
-//   (lowerCase = false) &&
-//   (upperCase = false) &&
-//   (numbers = true) &&
-//   (special = false)
-// ) {
-//   userPassword = charsNumbers;
-//   window.alert(userPassword);
-// }
-// // outcomes where upperCase always true
-//   else if (
-//   (lowerCase = false) &&
-//   (upperCase = true) &&
-//   (numbers = false) &&
-//   (special = true)
-// ) {
-//   userPassword = userPassword.concat(charsUpperCase, special);
-//   window.alert(userPassword);
-// } else if (
-//   (lowerCase = false) &&
-//   (upperCase = true) &&
-//   (numbers = false) &&
-//   (special = false)
-// ) {
-//   userPassword = charsUpperCase;
-//   window.alert(userPassword);
-// }
-// // outcomes where lowerCase always true
-//   else if (
-//   (lowerCase = true) &&
-//   (upperCase = false) &&
-//   (numbers = true) &&
-//   (special = true)
-// ) {
-//   userPassword = userPassword.concat(charsLowerCase, numbers, special);
-//   window.alert(userPassword);
-// } else if (
-//   (lowerCase = true) &&
-//   (upperCase = false) &&
-//   (numbers = false) &&
-//   (special = true)
-// ) {
-//   userPassword = userPassword.concat(charsLowerCase, special);
-//   window.alert(userPassword);
-// } else if (
-//   (lowerCase = true) &&
-//   (upperCase = false) &&
-//   (numbers = false) &&
-//   (special = false)
-// ) {
-//   userPassword = charsLowerCase;
-//   window.alert(userPassword);
-// } else {
-//   //implied that user did not select any char set, and thus needs to start over
-//   generatePassword();
-// }
