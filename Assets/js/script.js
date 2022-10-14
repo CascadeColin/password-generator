@@ -110,10 +110,8 @@ function generatePassword() {
   //blank array that will be modified based on user inputs
   let userPassword = [];
   let pass;
-
   //array called in for loop to ask the user questions one at a time
   let questions = [askLower, askUpper, askNumbers, askSpecial];
-
   // functions placed into "questions" array to prompt user with for loop.  if ok, use char set, else don't use char set
   function askLower() {
     if (
@@ -189,6 +187,7 @@ function generatePassword() {
       window.alert(
         "You must select at least one character set.  Please try again!"
       );
+      generatePassword();
     } else {
     }
 
@@ -200,30 +199,27 @@ function generatePassword() {
 
     //converts string to a useable number
     let passLength = Number(passLengthString);
-    
+
     if (8 <= passLength && 128 >= passLength) {
-      window.alert("correct length");
+      window.alert("Creating password!");
       //doubles the length of userPassword if user wants more characters than is available, then randomizes it
       if (passLength > userPassword.length) {
         userPassword = userPassword.concat(userPassword);
         //random sort using Knuth method
         shuffle(userPassword);
-        
       } else {
       }
     } else {
       window.alert(
         "You selected an invalid password length.  Please try again!"
       );
+      return "";
     }
     userPassword.length = passLength;
-    //new values
-    console.log("adj passLength #: " + passLength);
-    console.log("adj userPassword array length: " + userPassword.length);
-    pass = userPassword.join('');
-    console.log(pass);
+    pass = userPassword.join("");
     return pass;
   } else {
     window.alert('Click on "Generate Password" if you change your mind.');
+    return "";
   }
 }
