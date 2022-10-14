@@ -115,30 +115,24 @@ function generatePassword() {
   let numbers = false;
   let special = false;
   //blank array that will be modified based on user inputs
-  let userPassword = [""];
+  let userPassword = [];
 
   //array called in for loop to ask the user questions one at a time
   let questions = [askLower, askUpper, askNumbers, askSpecial];
 
   // functions placed into "questions" array to prompt user with for loop.  if ok, use char set, else don't use char set
   function askLower() {
-    if (
-      window.confirm(
-        "Would you like to use lower case letters in your password?"
-      )
-    ) {
+    if (window.confirm("Would you like to use lower case letters in your password?")) {
       lowerCase = true;
+      userPassword = userPassword.concat(charsLowerCase);
     } else {
       lowerCase = false;
     }
   }
   function askUpper() {
-    if (
-      window.confirm(
-        "Would you like to use upper case letters in your password?"
-      )
-    ) {
+    if (window.confirm("Would you like to use upper case letters in your password?")) {
       upperCase = true;
+      userPassword = userPassword.concat(charsUpperCase);
     } else {
       upperCase = false;
     }
@@ -146,7 +140,7 @@ function generatePassword() {
   function askNumbers() {
     if (window.confirm("Would you like to use numbers in your password?")) {
       numbers = true;
-      //concat numbers array for userPassword!!!!!!!!!!!!!
+      userPassword = userPassword.concat(charsNumbers);
     } else {
       numbers = false;
     }
@@ -158,6 +152,7 @@ function generatePassword() {
       )
     ) {
       special = true;
+      userPassword = userPassword.concat(charsSpecial);
     } else {
       special = false;
     }
@@ -169,10 +164,20 @@ function generatePassword() {
     for (i = 0; i < questions.length; i++) {
       questions[i]();
     }
-    // if (questions[0] = false) {
-    //   console.log("lowerCase is false");
-    // } else {
-    // }
+    console.log(userPassword);
+
+    //ask users for length of password (8 to 128) via prompt
+    //user inputs a number between 8 and 128.  This becomes the length of userPassword array.  Then, run a for loop of a concat array containing the lists that the user specified such as "concatArray(math.floor(math.random()*concatArray.length)", looping that until userPassword.length is reached.  Store results in userPassword[] and convert to a string using toString().
+
+    //validate user input and verify at least one chars selected, else close program
+    //create password and link it to provided code
+  } else {
+    window.alert('Click on "Generate Password" if you change your mind.');
+  }
+}
+
+
+//storage for code that may/may not be dead
 
     //4 outcomes where special always true
     //broken, but may revisit
@@ -266,13 +271,3 @@ function generatePassword() {
     //   //implied that user did not select any char set, and thus needs to start over
     //   generatePassword();
     // }
-
-    //ask users for length of password (8 to 128) via prompt
-    //user inputs a number between 8 and 128.  This becomes the length of userPassword array.  Then, run a for loop of a concat array containing the lists that the user specified such as "concatArray(math.floor(math.random()*concatArray.length)", looping that until userPassword.length is reached.  Store results in userPassword[] and convert to a string using toString().
-
-    //validate user input and verify at least one chars selected, else close program
-    //create password and link it to provided code
-  } else {
-    window.alert('Click on "Generate Password" if you change your mind.');
-  }
-}
