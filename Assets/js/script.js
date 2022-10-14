@@ -122,7 +122,11 @@ function generatePassword() {
 
   // functions placed into "questions" array to prompt user with for loop.  if ok, use char set, else don't use char set
   function askLower() {
-    if (window.confirm("Would you like to use lower case letters in your password?")) {
+    if (
+      window.confirm(
+        "Would you like to use lower case letters in your password?"
+      )
+    ) {
       lowerCase = true;
       userPassword = userPassword.concat(charsLowerCase);
     } else {
@@ -130,7 +134,11 @@ function generatePassword() {
     }
   }
   function askUpper() {
-    if (window.confirm("Would you like to use upper case letters in your password?")) {
+    if (
+      window.confirm(
+        "Would you like to use upper case letters in your password?"
+      )
+    ) {
       upperCase = true;
       userPassword = userPassword.concat(charsUpperCase);
     } else {
@@ -165,7 +173,23 @@ function generatePassword() {
       questions[i]();
     }
     console.log(userPassword);
-    
+    let passLengthString = prompt(
+      "Please enter the number of characters to use in your password (between 8 and 128)."
+    );
+    //converts string to a useable number
+    let passLength = Number(passLengthString);
+    console.log(typeof passLength);
+    console.log(passLength);
+
+    if ((8 <= passLength) && (128 >= passLength)) {
+      //continue with the process
+      console.log(passLength);
+      window.alert("correct length");
+    } else {
+      window.alert("You selected an invalid password length.  Please try again!");
+      generatePassword();
+    }
+
     //ask users for length of password (8 to 128) via prompt
     //user inputs a number between 8 and 128.  This becomes the length of userPassword array.  Then, run a for loop of a concat array containing the lists that the user specified such as "concatArray(math.floor(math.random()*concatArray.length)", looping that until userPassword.length is reached.  Store results in userPassword[] and convert to a string using toString().
 
@@ -176,98 +200,97 @@ function generatePassword() {
   }
 }
 
-
 //storage for code that may/may not be dead
 
-    //4 outcomes where special always true
-    //broken, but may revisit
-    // if (
-    //   (lowerCase = true) &&
-    //   (upperCase = true) &&
-    //   (numbers = true) &&
-    //   (special = true)
-    // ) {
-    //   userPassword = charsLowerCase.concat(charsUpperCase, numbers, special);
-    //   window.alert(userPassword);
-    // } else if (
-    //   (lowerCase = false) &&
-    //   (upperCase = true) &&
-    //   (numbers = true) &&
-    //   (special = true)
-    // ) {
-    //   userPassword = userPassword.concat(charsUpperCase, numbers, special);
-    //   window.alert(userPassword);
-    // } else if (
-    //   (lowerCase = false) &&
-    //   (upperCase = false) &&
-    //   (numbers = true) &&
-    //   (special = true)
-    // ) {
-    //   userPassword = userPassword.concat(numbers, special);
-    //   window.alert(userPassword);
-    // } else if (
-    //   (lowerCase = false) &&
-    //   (upperCase = false) &&
-    //   (numbers = false) &&
-    //   (special = true)
-    // ) {
-    //   userPassword = charsSpecial;
-    //   window.alert(userPassword);
-    // }
-    // //4 outcomes where numbers always true
-    //   else if (
-    //   (lowerCase = false) &&
-    //   (upperCase = false) &&
-    //   (numbers = true) &&
-    //   (special = false)
-    // ) {
-    //   userPassword = charsNumbers;
-    //   window.alert(userPassword);
-    // }
-    // // outcomes where upperCase always true
-    //   else if (
-    //   (lowerCase = false) &&
-    //   (upperCase = true) &&
-    //   (numbers = false) &&
-    //   (special = true)
-    // ) {
-    //   userPassword = userPassword.concat(charsUpperCase, special);
-    //   window.alert(userPassword);
-    // } else if (
-    //   (lowerCase = false) &&
-    //   (upperCase = true) &&
-    //   (numbers = false) &&
-    //   (special = false)
-    // ) {
-    //   userPassword = charsUpperCase;
-    //   window.alert(userPassword);
-    // }
-    // // outcomes where lowerCase always true
-    //   else if (
-    //   (lowerCase = true) &&
-    //   (upperCase = false) &&
-    //   (numbers = true) &&
-    //   (special = true)
-    // ) {
-    //   userPassword = userPassword.concat(charsLowerCase, numbers, special);
-    //   window.alert(userPassword);
-    // } else if (
-    //   (lowerCase = true) &&
-    //   (upperCase = false) &&
-    //   (numbers = false) &&
-    //   (special = true)
-    // ) {
-    //   userPassword = userPassword.concat(charsLowerCase, special);
-    //   window.alert(userPassword);
-    // } else if (
-    //   (lowerCase = true) &&
-    //   (upperCase = false) &&
-    //   (numbers = false) &&
-    //   (special = false)
-    // ) {
-    //   userPassword = charsLowerCase;
-    //   window.alert(userPassword);
-    // } else {
-    //   //implied that user did not select any char set, and thus needs to start over
-    //   generatePassword();
-    // }
+//4 outcomes where special always true
+//broken, but may revisit
+// if (
+//   (lowerCase = true) &&
+//   (upperCase = true) &&
+//   (numbers = true) &&
+//   (special = true)
+// ) {
+//   userPassword = charsLowerCase.concat(charsUpperCase, numbers, special);
+//   window.alert(userPassword);
+// } else if (
+//   (lowerCase = false) &&
+//   (upperCase = true) &&
+//   (numbers = true) &&
+//   (special = true)
+// ) {
+//   userPassword = userPassword.concat(charsUpperCase, numbers, special);
+//   window.alert(userPassword);
+// } else if (
+//   (lowerCase = false) &&
+//   (upperCase = false) &&
+//   (numbers = true) &&
+//   (special = true)
+// ) {
+//   userPassword = userPassword.concat(numbers, special);
+//   window.alert(userPassword);
+// } else if (
+//   (lowerCase = false) &&
+//   (upperCase = false) &&
+//   (numbers = false) &&
+//   (special = true)
+// ) {
+//   userPassword = charsSpecial;
+//   window.alert(userPassword);
+// }
+// //4 outcomes where numbers always true
+//   else if (
+//   (lowerCase = false) &&
+//   (upperCase = false) &&
+//   (numbers = true) &&
+//   (special = false)
+// ) {
+//   userPassword = charsNumbers;
+//   window.alert(userPassword);
+// }
+// // outcomes where upperCase always true
+//   else if (
+//   (lowerCase = false) &&
+//   (upperCase = true) &&
+//   (numbers = false) &&
+//   (special = true)
+// ) {
+//   userPassword = userPassword.concat(charsUpperCase, special);
+//   window.alert(userPassword);
+// } else if (
+//   (lowerCase = false) &&
+//   (upperCase = true) &&
+//   (numbers = false) &&
+//   (special = false)
+// ) {
+//   userPassword = charsUpperCase;
+//   window.alert(userPassword);
+// }
+// // outcomes where lowerCase always true
+//   else if (
+//   (lowerCase = true) &&
+//   (upperCase = false) &&
+//   (numbers = true) &&
+//   (special = true)
+// ) {
+//   userPassword = userPassword.concat(charsLowerCase, numbers, special);
+//   window.alert(userPassword);
+// } else if (
+//   (lowerCase = true) &&
+//   (upperCase = false) &&
+//   (numbers = false) &&
+//   (special = true)
+// ) {
+//   userPassword = userPassword.concat(charsLowerCase, special);
+//   window.alert(userPassword);
+// } else if (
+//   (lowerCase = true) &&
+//   (upperCase = false) &&
+//   (numbers = false) &&
+//   (special = false)
+// ) {
+//   userPassword = charsLowerCase;
+//   window.alert(userPassword);
+// } else {
+//   //implied that user did not select any char set, and thus needs to start over
+//   generatePassword();
+// }
