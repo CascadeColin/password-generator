@@ -15,19 +15,21 @@
 - [License](#license)
 - [Badges](#badges)
 
-## Description  NOT DONE
+## Description
 
-This web app functions as a launching point for creating a portfolio for me to showcase my skills as a web developer. It contains a standard header with nav links, an image of me at my best (in the mountains!), along with some associated text and second contact me link. There are 3 sections following the background image. The first is an about me detailing some information about my professional and private life. The second is a link to previously developed web apps, with an emphasis on the most recent one. Lastly, there is a contact me section with links to my LinkedIn, email, phone number, and Github.  The web app also has media queries that enable it to function on tablets and phones.
+The deployed web application can be found at: https://cascadecolin.github.io/Password-Generator/
 
-This challenge put me through a wide range of mental states. Everything from extreme frustration getting stuck for an extended period of time on a typo, to immense liberation when I crossed hurdles that I didn't even know were possible. This project has let me experience what others told me I would experience as a developer. Overall, it was quite a rewarding and fun experience.
+The purpose of this application is to provide users with a secure, randomly generated password. Users are allowed to specify if they would prefer to use lower case letter, upper case letters, numbers, and symbols. Additionally, users are also prompted to specify a password length of 8 to 128 characters. Less than 8 characters is not allowed as that would not be a secure password. Additionally, most modern websites do not allow users to have passwords fewer than 8 characters. There is also a 128 character limit because most websites do not allow users to exceed that amount, primarily because it is a waste of computational resources.
 
-Preview of the web app on a 720px wide smartphone:
+Upon selecting at least 1 set of characters and inputting a valid password length, the user is presented with a password that can be easily copy and pasted. Using a secure and unique password is critical for account safety and this application will help make that safety easier for people to access.
 
-![Deployed Page](./assets/images/week2deploy.png)
+Below: A preview of the deployed page with a password already generated.
 
-## Technology  NOT DONE
+![Deployed Page](./Assets/Images/deployedPage.png)
 
-Microsoft's VS Code was the programming platform. GitBash was used for version control for the repository. A GitHub repository was utilized for version control, as well as provide a streamlined deployment to GitHub Pages.  Testing for bugs and functionality was performed using Chrome DevTools.
+## Technology
+
+Microsoft's VS Code was the programming platform. GitBash was used for version control for the repository. A GitHub repository was utilized for version control, as well as provide a streamlined deployment to GitHub Pages. Testing for bugs and functionality was performed using Chrome DevTools.
 
 ## License
 
