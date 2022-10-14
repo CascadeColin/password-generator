@@ -165,7 +165,7 @@ function generatePassword() {
       questions[i]();
     }
     console.log(userPassword);
-
+    
     //ask users for length of password (8 to 128) via prompt
     //user inputs a number between 8 and 128.  This becomes the length of userPassword array.  Then, run a for loop of a concat array containing the lists that the user specified such as "concatArray(math.floor(math.random()*concatArray.length)", looping that until userPassword.length is reached.  Store results in userPassword[] and convert to a string using toString().
 
