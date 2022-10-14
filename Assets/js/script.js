@@ -146,6 +146,7 @@ function generatePassword() {
   function askNumbers() {
     if (window.confirm("Would you like to use numbers in your password?")) {
       numbers = true;
+      //concat numbers array for userPassword!!!!!!!!!!!!!
     } else {
       numbers = false;
     }
