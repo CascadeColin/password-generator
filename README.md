@@ -2,6 +2,8 @@
 
 ## Overview
 
+- Currently in redevelopment (converting to a Next.js project)
+
 ### The goal of this project
 
 - Create a web application that randomly generates a secure password
