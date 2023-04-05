@@ -17,17 +17,16 @@ export default function PasswordGen() {
     }
   }
 
-  function formSubmit(e: FormEvent): void {
+  function formSubmit(e: FormEvent<HTMLButtonElement>): void {
+    e.preventDefault()
     // TODO: implement password randomization
-    // const temp: string = generatePassword(userSettings);
-    // console.log(temp);
+    generatePassword(userSettings)
     // setPassword(temp);
   }
 
   return (
     <>
       <form className="flex flex-col items-center">
-        {/* FIXME: state is not updating properly.  needs a double click, and length converts to a boolean */}
         {renderForm.map(([i, key, value]: FormData) => {
           if (typeof value === "string") {
             return (
@@ -48,7 +47,7 @@ export default function PasswordGen() {
           return (
             <div key={i}>
               <label htmlFor={key}>Include {key}?</label>
-              <input type="checkbox" id={key} onChange={handleChangeEvent} />
+              <input type="checkbox" id={key} checked={value} onChange={handleChangeEvent} />
             </div>
           );
         })}
