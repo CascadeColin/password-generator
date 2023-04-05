@@ -1,16 +1,12 @@
-import { useState } from "react";
+import Header from './components/header'
+import PasswordGen from './components/passwordGen';
+import { settings } from './helpers/interfacesTypes'
 
-function App() {
-  const [count, setCount] = useState(0);
-
+export default function App() {
   return (
     <>
-      <h1 className="text-3xl font-bold underline">Hello world!</h1>
-      <button className="rounded-full" onClick={() => setCount((count) => count + 1)}>
-        count is {count}
-      </button>
+      <Header/>
+      <PasswordGen settings={settings}/>
     </>
   );
 }
-
-export default App;
