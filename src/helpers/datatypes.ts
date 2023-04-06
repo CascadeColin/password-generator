@@ -4,13 +4,7 @@ export interface Form {
   numbers: boolean;
   symbols: boolean;
   length: string;
-  
 }
-
-export type FormContentProps = {
-  setUserSettings: Function;
-  userSettings: Form;
-};
 
 export const form: Form = {
   // toggleable user settings for password content

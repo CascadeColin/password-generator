@@ -1,13 +1,13 @@
 import { ChangeEvent, FormEvent, useState } from "react";
-import { form, FormData } from "../helpers/interfacesTypes";
+import { form, FormData } from "../helpers/datatypes";
 import { generatePassword } from "../helpers/generator";
 import { formSetup } from "../helpers/formSetup";
 
 export default function PasswordGen() {
   const [userSettings, setUserSettings] = useState(form);
-  const [password, setPassword] = useState('')
+  const [password, setPassword] = useState("");
   console.log("state: ", userSettings);
-  console.log("password: ", password)
+  console.log("password: ", password);
 
   const renderForm: FormData[] = formSetup(userSettings);
 
@@ -20,8 +20,7 @@ export default function PasswordGen() {
   }
 
   function formSubmit(e: FormEvent<HTMLButtonElement>): void {
-    e.preventDefault()
-    // TODO: implement password randomization
+    e.preventDefault();
     setPassword(generatePassword(userSettings));
   }
 
@@ -51,7 +50,12 @@ export default function PasswordGen() {
           return (
             <div key={i}>
               <label htmlFor={key}>Include {key}?</label>
-              <input type="checkbox" id={key} checked={value} onChange={handleChangeEvent} />
+              <input
+                type="checkbox"
+                id={key}
+                checked={value}
+                onChange={handleChangeEvent}
+              />
             </div>
           );
         })}
@@ -59,7 +63,6 @@ export default function PasswordGen() {
           Generate Password
         </button>
       </form>
-      {/* conditionally rendered password */}
       {password && <p className="text-center">Your password: {password}</p>}
     </>
   );
