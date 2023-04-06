@@ -4,6 +4,7 @@ export interface Form {
   numbers: boolean;
   symbols: boolean;
   length: string;
+  
 }
 
 export type FormContentProps = {
@@ -18,7 +19,7 @@ export const form: Form = {
   numbers: true,
   symbols: true,
   // password length (8-64)
-  length: "8",
+  length: "16",
 };
 
 // controls content rendered to the form by formatting userSettings state var.  [index, key, value]

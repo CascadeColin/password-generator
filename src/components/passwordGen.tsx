@@ -5,7 +5,9 @@ import { formSetup } from "../helpers/formSetup";
 
 export default function PasswordGen() {
   const [userSettings, setUserSettings] = useState(form);
+  const [password, setPassword] = useState('')
   console.log("state: ", userSettings);
+  console.log("password: ", password)
 
   const renderForm: FormData[] = formSetup(userSettings);
 
@@ -20,8 +22,7 @@ export default function PasswordGen() {
   function formSubmit(e: FormEvent<HTMLButtonElement>): void {
     e.preventDefault()
     // TODO: implement password randomization
-    generatePassword(userSettings)
-    // setPassword(temp);
+    setPassword(generatePassword(userSettings));
   }
 
   return (
@@ -31,16 +32,19 @@ export default function PasswordGen() {
           if (typeof value === "string") {
             return (
               <div key={i}>
-                <label htmlFor={key}>How long should it be?</label>
+                <label htmlFor={key}>Password Length? (between 8 and 64)</label>
                 <input
-                  type="number"
+                  type="range"
                   name={key}
                   id={key}
                   min="8"
                   max="64"
+                  value={userSettings.length}
+                  step="1"
                   className="bg-white text-black"
                   onChange={handleChangeEvent}
                 />
+                <p>Password length: {userSettings.length}</p>
               </div>
             );
           }
@@ -56,6 +60,7 @@ export default function PasswordGen() {
         </button>
       </form>
       {/* conditionally rendered password */}
+      {password && <p className="text-center">Your password: {password}</p>}
     </>
   );
 }
