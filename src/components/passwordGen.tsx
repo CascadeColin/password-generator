@@ -24,6 +24,7 @@ export default function PasswordGen() {
         50
       );
     }
+    // clears the interval when password !== ""
     return () => {
       clearInterval(interval);
     };
@@ -71,7 +72,7 @@ export default function PasswordGen() {
       setUserSettings({ ...userSettings, length: "128" });
     }
     setPassword(generatePassword(userSettings));
-    setUserSettings(defaultPasswordSettings);
+    // setUserSettings(defaultPasswordSettings);
     setCopysuccess("");
   }
 
@@ -81,85 +82,104 @@ export default function PasswordGen() {
     setCopysuccess("Password copied to clipboard!");
   }
 
+  function resetDefaultPasswordSettings(e: FormEvent<HTMLButtonElement>): void {
+    e.preventDefault();
+    setUserSettings(defaultPasswordSettings);
+    setPassword("");
+    setCopysuccess("");
+  }
+
   return (
     <>
       {password ? (
-        <div>
+        <div className={passwordGenStyle.passwordContainerStyle}>
           <h2 className={passwordGenStyle.passwordHeaderStyle}>
             Your password:
           </h2>
           <p className={passwordGenStyle.passwordContentStyle}>{password}</p>
         </div>
       ) : (
-        <div>
+        <div className={passwordGenStyle.passwordContainerStyle}>
           <h2 className={passwordGenStyle.passwordHeaderStyle}>
-            Preparing your randomized password...
+            Preparing your password...
           </h2>
           <p className={passwordGenStyle.passwordContentStyle}>{thematrix}</p>
         </div>
       )}
       <div className={passwordGenStyle.formContainerStyle}>
-        <h3 className={passwordGenStyle.formHeaderStyle}>
-          Customize your new password:
-        </h3>
-        {/* probably should be its own component */}
-        <form className={passwordGenStyle.formStyle}>
-          {renderForm.map(([i, key, value]: FormData) => {
-            if (typeof value === "string") {
+        <div className={passwordGenStyle.formSubcontainerLeftStyle}>
+          <h3 className={passwordGenStyle.formHeaderStyle}>
+            Customize your password:
+          </h3>
+          {/* probably should be its own component */}
+          <form className={passwordGenStyle.formStyle}>
+            {renderForm.map(([i, key, value]: FormData) => {
+              if (typeof value === "string") {
+                return (
+                  <div key={i}>
+                    <label
+                      htmlFor={key}
+                      className={passwordGenStyle.formLabelStyle}
+                    >
+                      Password Length?
+                    </label>
+                    <input
+                      type="number"
+                      name={key}
+                      id={key}
+                      min="8"
+                      max="128"
+                      value={Number(value)}
+                      step="1"
+                      className={passwordGenStyle.formInputLengthStyle}
+                      onChange={handleChangeEvent}
+                    />
+                  </div>
+                );
+              }
               return (
                 <div key={i}>
                   <label
                     htmlFor={key}
                     className={passwordGenStyle.formLabelStyle}
                   >
-                    Password Length?
+                    Include {key}?
                   </label>
                   <input
-                    type="number"
-                    name={key}
+                    type="checkbox"
                     id={key}
-                    min="8"
-                    max="128"
-                    value={Number(value)}
-                    step="1"
-                    className={passwordGenStyle.formInputLengthStyle}
+                    checked={value}
                     onChange={handleChangeEvent}
+                    className="ml-[10px]"
                   />
                 </div>
               );
-            }
-            return (
-              <div key={i}>
-                <label
-                  htmlFor={key}
-                  className={passwordGenStyle.formLabelStyle}
-                >
-                  Include {key}?
-                </label>
-                <input
-                  type="checkbox"
-                  id={key}
-                  checked={value}
-                  onChange={handleChangeEvent}
-                  className="ml-[10px]"
-                />
-              </div>
-            );
-          })}
+            })}
+          </form>
+        </div>
+        <div className={passwordGenStyle.formSubcontainerRightStyle}>
           <button className={passwordGenStyle.buttonStyle} onClick={formSubmit}>
             Generate Password
           </button>
           {/* once a password is generated, render copy password button */}
           {password && (
-            <button
-              className={passwordGenStyle.buttonStyle}
-              onClick={copyToClipboard}
-            >
-              Copy Password
-            </button>
+            <>
+              <button
+                className={passwordGenStyle.buttonStyle}
+                onClick={resetDefaultPasswordSettings}
+              >
+                Reset Settings
+              </button>
+              <button
+                className={passwordGenStyle.buttonStyle}
+                onClick={copyToClipboard}
+              >
+                Copy Password
+              </button>
+            </>
           )}
-          {copysuccess && <p>{copysuccess}</p>}
-        </form>
+          {copysuccess && <p className={passwordGenStyle.copyConfirmationStyle}>{copysuccess}</p>}
+        </div>
       </div>
     </>
   );

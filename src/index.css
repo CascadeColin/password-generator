@@ -3,10 +3,8 @@
 @tailwind utilities;
 
 
-/* dark mode - may add toggle for light mode later */
-* {
-    background-color: #313131;
-    color: white;
+body {
+    background-color: #a5d6ff;
     font-family: "Roboto Mono", monospace;
 }
 
