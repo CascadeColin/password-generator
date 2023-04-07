@@ -9,3 +9,10 @@
     color: white;
     font-family: "Roboto Mono", monospace;
 }
+
+/* clear box-shadow on all browsers */
+input[type="number"] {
+    -webkit-box-shadow: none;
+    -moz-box-shadow: none;
+    box-shadow: none;  
+}

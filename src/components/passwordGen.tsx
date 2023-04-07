@@ -2,23 +2,32 @@ import { ChangeEvent, FormEvent, useState, useEffect } from "react";
 import { defaultPasswordSettings, FormData } from "../helpers/datatypes";
 import { generatePassword } from "../helpers/passGenerator";
 import { formSetup } from "../helpers/formSetup";
+import { passwordGenStyle } from "../styles/passwordGenStyle";
 
 export default function PasswordGen() {
   const [userSettings, setUserSettings] = useState(defaultPasswordSettings);
 
   // initialize password state to show a password with default settings
   const [password, setPassword] = useState("");
+  // updates state in useEffect for "scrambling a new password"
   const [thematrix, setThematrix] = useState(generatePassword(userSettings));
+  // UX for "copy password" button - displays a message for user
+  const [copysuccess, setCopysuccess] = useState("");
 
+  // "string scrambler"
   useEffect(() => {
-    const interval = setInterval(
-      () => setThematrix(generatePassword(userSettings)),
-      50
-    );
+    let interval: number;
+    // only run effect if password is falsy
+    if (!password) {
+      interval = setInterval(
+        () => setThematrix(generatePassword(userSettings)),
+        50
+      );
+    }
     return () => {
       clearInterval(interval);
     };
-  }, [userSettings]);
+  }, [password, userSettings]);
 
   // if all booleans are false, set lowercase to true
   const { lowercase, uppercase, numbers, symbols } = userSettings;
@@ -41,9 +50,11 @@ export default function PasswordGen() {
     if (e.target.value === "on") {
       setUserSettings({ ...userSettings, [e.target.id]: e.target.checked });
       setPassword("");
+      setCopysuccess("");
     } else {
       setUserSettings({ ...userSettings, [e.target.id]: e.target.value });
       setPassword("");
+      setCopysuccess("");
     }
   }
 
@@ -61,45 +72,46 @@ export default function PasswordGen() {
     }
     setPassword(generatePassword(userSettings));
     setUserSettings(defaultPasswordSettings);
+    setCopysuccess("");
   }
 
   function copyToClipboard(e: FormEvent<HTMLButtonElement>): void {
     e.preventDefault();
     navigator.clipboard.writeText(password);
+    setCopysuccess("Password copied to clipboard!");
   }
 
   return (
     <>
       {password ? (
-        <div className="">
-          <h2 className="text-center mt-10 mb-1 text-2xl max-w-xl mx-auto">
+        <div>
+          <h2 className={passwordGenStyle.passwordHeaderStyle}>
             Your password:
           </h2>
-          <p className="text-center mb-5 text-lg [word-wrap:break-word] h-32 max-w-xl mx-auto">
-            {password}
-          </p>
+          <p className={passwordGenStyle.passwordContentStyle}>{password}</p>
         </div>
       ) : (
-        <div className="">
-          <h2 className="text-center mt-10 mb-1 text-2xl max-w-xl mx-auto">
+        <div>
+          <h2 className={passwordGenStyle.passwordHeaderStyle}>
             Preparing your randomized password...
           </h2>
-          <p className="text-center mb-5 text-lg [word-wrap:break-word] h-32 max-w-xl mx-auto">
-            {thematrix}
-          </p>
+          <p className={passwordGenStyle.passwordContentStyle}>{thematrix}</p>
         </div>
       )}
-      <div className="flex flex-col max-w-lg mx-auto">
-        <h3 className="text-center mb-2 text-xl">
+      <div className={passwordGenStyle.formContainerStyle}>
+        <h3 className={passwordGenStyle.formHeaderStyle}>
           Customize your new password:
         </h3>
         {/* probably should be its own component */}
-        <form className="flex flex-col items-center">
+        <form className={passwordGenStyle.formStyle}>
           {renderForm.map(([i, key, value]: FormData) => {
             if (typeof value === "string") {
               return (
                 <div key={i}>
-                  <label htmlFor={key} className="leading-7 mb-[10px] ">
+                  <label
+                    htmlFor={key}
+                    className={passwordGenStyle.formLabelStyle}
+                  >
                     Password Length?
                   </label>
                   <input
@@ -110,7 +122,7 @@ export default function PasswordGen() {
                     max="128"
                     value={Number(value)}
                     step="1"
-                    className="bg-white text-black h-[20px] w-11 ml-[10px]"
+                    className={passwordGenStyle.formInputLengthStyle}
                     onChange={handleChangeEvent}
                   />
                 </div>
@@ -118,7 +130,10 @@ export default function PasswordGen() {
             }
             return (
               <div key={i}>
-                <label htmlFor={key} className="leading-7 mb-[10px]">
+                <label
+                  htmlFor={key}
+                  className={passwordGenStyle.formLabelStyle}
+                >
                   Include {key}?
                 </label>
                 <input
@@ -131,21 +146,19 @@ export default function PasswordGen() {
               </div>
             );
           })}
-          <button
-            className="rounded p-1 bg-slate-600 mt-2"
-            onClick={formSubmit}
-          >
+          <button className={passwordGenStyle.buttonStyle} onClick={formSubmit}>
             Generate Password
           </button>
           {/* once a password is generated, render copy password button */}
           {password && (
             <button
-              className="rounded p-1 bg-slate-600 mt-2"
+              className={passwordGenStyle.buttonStyle}
               onClick={copyToClipboard}
             >
               Copy Password
             </button>
           )}
+          {copysuccess && <p>{copysuccess}</p>}
         </form>
       </div>
     </>

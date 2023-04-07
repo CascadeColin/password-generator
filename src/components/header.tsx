@@ -1,7 +1,9 @@
+import { headerStyle } from "../styles/headerStyle";
+
 export default function Header() {
   return (
     <>
-      <h1 className="text-3xl font-bold text-center p-5">
+      <h1 className={headerStyle.header}>
         Welcome to Password Generator!
       </h1>
     </>
