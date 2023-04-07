@@ -6,7 +6,8 @@ export interface Form {
   length: string;
 }
 
-export const form: Form = {
+// default password settings
+export const defaultPasswordSettings: Form = {
   // toggleable user settings for password content
   lowercase: true,
   uppercase: true,

@@ -1,13 +1,24 @@
-import { ChangeEvent, FormEvent, useState } from "react";
-import { form, FormData } from "../helpers/datatypes";
+import { ChangeEvent, FormEvent, useState, useEffect } from "react";
+import { defaultPasswordSettings, FormData } from "../helpers/datatypes";
 import { generatePassword } from "../helpers/passGenerator";
 import { formSetup } from "../helpers/formSetup";
 
 export default function PasswordGen() {
-  const [userSettings, setUserSettings] = useState(form);
+  const [userSettings, setUserSettings] = useState(defaultPasswordSettings);
 
   // initialize password state to show a password with default settings
-  const [password, setPassword] = useState(generatePassword(userSettings));
+  const [password, setPassword] = useState("");
+  const [thematrix, setThematrix] = useState(generatePassword(userSettings));
+
+  useEffect(() => {
+    const interval = setInterval(
+      () => setThematrix(generatePassword(userSettings)),
+      50
+    );
+    return () => {
+      clearInterval(interval);
+    };
+  }, [userSettings]);
 
   // if all booleans are false, set lowercase to true
   const { lowercase, uppercase, numbers, symbols } = userSettings;
@@ -23,19 +34,16 @@ export default function PasswordGen() {
 
   // generates data that is mapped to create form
   const renderForm: FormData[] = formSetup(userSettings);
-  // console.log(renderForm)
 
   // updates state as user manipulates password settings
   function handleChangeEvent(e: ChangeEvent<HTMLInputElement>): void {
-    const lengthNumber = Number(userSettings.length);
-    console.log(lengthNumber);
-    // if boolean value
+    // if boolean value, else string value
     if (e.target.value === "on") {
       setUserSettings({ ...userSettings, [e.target.id]: e.target.checked });
-    }
-    // if string value
-    else {
+      setPassword("");
+    } else {
       setUserSettings({ ...userSettings, [e.target.id]: e.target.value });
+      setPassword("");
     }
   }
 
@@ -52,6 +60,7 @@ export default function PasswordGen() {
       setUserSettings({ ...userSettings, length: "128" });
     }
     setPassword(generatePassword(userSettings));
+    setUserSettings(defaultPasswordSettings);
   }
 
   function copyToClipboard(e: FormEvent<HTMLButtonElement>): void {
@@ -61,53 +70,84 @@ export default function PasswordGen() {
 
   return (
     <>
-      <div>
-        <h1 className="text-center mt-10 mx-10 mb-1">Your password:</h1>
-        <p className="text-center mb-5">{password}</p>
-      </div>
-      <form className="flex flex-col items-center">
-        {renderForm.map(([i, key, value]: FormData) => {
-          if (typeof value === "string") {
+      {password ? (
+        <div className="">
+          <h2 className="text-center mt-10 mb-1 text-2xl max-w-xl mx-auto">
+            Your password:
+          </h2>
+          <p className="text-center mb-5 text-lg [word-wrap:break-word] h-32 max-w-xl mx-auto">
+            {password}
+          </p>
+        </div>
+      ) : (
+        <div className="">
+          <h2 className="text-center mt-10 mb-1 text-2xl max-w-xl mx-auto">
+            Preparing your randomized password...
+          </h2>
+          <p className="text-center mb-5 text-lg [word-wrap:break-word] h-32 max-w-xl mx-auto">
+            {thematrix}
+          </p>
+        </div>
+      )}
+      <div className="flex flex-col max-w-lg mx-auto">
+        <h3 className="text-center mb-2 text-xl">
+          Customize your new password:
+        </h3>
+        {/* probably should be its own component */}
+        <form className="flex flex-col items-center">
+          {renderForm.map(([i, key, value]: FormData) => {
+            if (typeof value === "string") {
+              return (
+                <div key={i}>
+                  <label htmlFor={key} className="leading-7 mb-[10px] ">
+                    Password Length?
+                  </label>
+                  <input
+                    type="number"
+                    name={key}
+                    id={key}
+                    min="8"
+                    max="128"
+                    value={Number(value)}
+                    step="1"
+                    className="bg-white text-black h-[20px] w-11 ml-[10px]"
+                    onChange={handleChangeEvent}
+                  />
+                </div>
+              );
+            }
             return (
               <div key={i}>
-                <label htmlFor={key}>Password Length?</label>
+                <label htmlFor={key} className="leading-7 mb-[10px]">
+                  Include {key}?
+                </label>
                 <input
-                  type="number"
-                  name={key}
+                  type="checkbox"
                   id={key}
-                  min="8"
-                  max="128"
-                  value={Number(value)}
-                  step="1"
-                  className="bg-white text-black"
+                  checked={value}
                   onChange={handleChangeEvent}
+                  className="ml-[10px]"
                 />
-                <p>Password length: {Number(value)}</p>
               </div>
             );
-          }
-          return (
-            <div key={i}>
-              <label htmlFor={key}>Include {key}?</label>
-              <input
-                type="checkbox"
-                id={key}
-                checked={value}
-                onChange={handleChangeEvent}
-              />
-            </div>
-          );
-        })}
-        <button className="rounded p-1 bg-slate-600 mt-2" onClick={formSubmit}>
-          Generate Password
-        </button>
-        <button
-          className="rounded p-1 bg-slate-600 mt-2"
-          onClick={copyToClipboard}
-        >
-          Copy Password
-        </button>
-      </form>
+          })}
+          <button
+            className="rounded p-1 bg-slate-600 mt-2"
+            onClick={formSubmit}
+          >
+            Generate Password
+          </button>
+          {/* once a password is generated, render copy password button */}
+          {password && (
+            <button
+              className="rounded p-1 bg-slate-600 mt-2"
+              onClick={copyToClipboard}
+            >
+              Copy Password
+            </button>
+          )}
+        </form>
+      </div>
     </>
   );
 }
