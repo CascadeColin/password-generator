@@ -121,7 +121,7 @@ export default function PasswordGen() {
                       htmlFor={key}
                       className={passwordGenStyle.formLabelStyle}
                     >
-                      Password Length?
+                      Password length?
                     </label>
                     <input
                       type="number"
