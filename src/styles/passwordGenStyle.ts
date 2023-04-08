@@ -1,5 +1,5 @@
 const passwordContainerStyle =
-  "flex flex-col max-w-lg mx-auto bg-white text-black border-white rounded shadow-[0_0_10px_rgba(0,0,0,0.5)] my-10 p-5 h-32";
+  "flex flex-col justify-center max-w-lg mx-auto bg-white text-black border-white rounded shadow-[0_0_10px_rgba(0,0,0,0.5)] my-10 p-5 h-32";
 
 const passwordHeaderStyle = "text-center text-2xl font-bold max-w-xl mx-auto";
 
