@@ -4,8 +4,9 @@ export default function Header() {
   return (
     <>
       <h1 className={headerStyle.header}>
-        Welcome to Password Generator!
+        Password Generator
       </h1>
+      <h2 className={headerStyle.subHeader}>by Colin Marshall</h2>
     </>
   );
 }

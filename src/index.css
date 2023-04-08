@@ -14,3 +14,23 @@ input[type="number"] {
     -moz-box-shadow: none;
     box-shadow: none;  
 }
+
+input[type="text"] {
+    -webkit-box-shadow: none;
+    -moz-box-shadow: none;
+    box-shadow: none;
+}
+
+::-webkit-scrollbar {
+    width: 5px;
+}
+
+::-webkit-scrollbar-track {
+    background: white;
+}
+
+::-webkit-scrollbar-thumb {
+    background-color: #475569;
+    border-radius: 100vh;
+    border: hidden;
+}

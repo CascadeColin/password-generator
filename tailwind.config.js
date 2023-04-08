@@ -5,6 +5,7 @@ export default {
     extend: {
       fontFamily: {
         robotoMono: ["Roboto Mono", "monospace"],
+        bebas: ['Bebas Neue', "cursive"]
       },
       color: {
         "dark": "#313131"

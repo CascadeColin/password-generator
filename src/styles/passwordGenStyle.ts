@@ -1,9 +1,9 @@
 const passwordContainerStyle =
-  "flex flex-col max-w-lg mx-auto bg-white text-black border-white rounded shadow-[0_0_10px_rgba(0,0,0,0.5)] my-10 p-5 ";
+  "flex flex-col max-w-lg mx-auto bg-white text-black border-white rounded shadow-[0_0_10px_rgba(0,0,0,0.5)] my-10 p-5 h-32";
 
 const passwordHeaderStyle = "text-center text-2xl font-bold max-w-xl mx-auto";
 
-const passwordContentStyle = "text-center text-lg [word-wrap:break-word]";
+const passwordContentStyle = "text-center text-lg [word-wrap:break-word] overflow-y-auto";
 
 const formContainerStyle =
   "flex flex-col md:flex-row max-w-lg mx-auto bg-white text-black border-white rounded shadow-[0_0_10px_rgba(0,0,0,0.5)]";
@@ -11,7 +11,7 @@ const formContainerStyle =
 const formSubcontainerLeftStyle = "flex flex-col flex-2 p-3";
 
 const formSubcontainerRightStyle =
-  "flex flex-col flex-1 p-3 border-l-2 justify-center";
+  "flex flex-col flex-1 p-3 border-l-2 ";
 
 const formHeaderStyle = "text-center mb-2 text-xl font-bold ";
 

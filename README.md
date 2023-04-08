@@ -1,37 +1,26 @@
-# 03 JavaScript: Password Generator
-
-## Overview
-
-- Currently in redevelopment (converting to a Next.js project)
-
-### The goal of this project
-
-- Create a web application that randomly generates a secure password
-- Allow the user to specify if they would prefer to use certain character types
-- Allow the user to specify a length between 8 and 128 characters
-
-## Table of Contents
-
-- [Description](#Description)
-- [Technology](#Technology)
-- [License](#license)
-- [Badges](#badges)
+# Password Generator using TypeScript, React, and Tailwind
 
 ## Description
 
-The deployed web application can be found at: https://cascadecolin.github.io/Password-Generator/
+A classic beginner project.  I made this app as my first TypeScript project, replacing my first vanilla JavaScript password generator (see previous commits for that code).  I decided to combine TypeScript with React and Tailwind for an extra challenge.  This is a fairly standard password generator that makes no assumption about the quantity of each character set used.  I leave it up to RNG to decide so that the password generated is less predictable.
 
-The purpose of this application is to provide users with a secure, randomly generated password. Users are allowed to specify if they would prefer to use lower case letter, upper case letters, numbers, and symbols. Additionally, users are also prompted to specify a password length of 8 to 128 characters. Less than 8 characters is not allowed as that would not be a secure password. Additionally, most modern websites do not allow users to have passwords fewer than 8 characters. There is also a 128 character limit because most websites do not allow users to exceed that amount, primarily because it is a waste of computational resources.
+## Instructions
 
-Upon selecting at least 1 set of characters and inputting a valid password length, the user is presented with a password that can be easily copy and pasted. Using a secure and unique password is critical for account safety and this application will help make that safety easier for people to access.
+Check or uncheck your preferred character sets.  You may manually enter a length of between 8 and 128 characters, or click the arrows to increment up or down.  Once your settings are done, click "Generate Password".
 
-Below: A preview of the deployed page with a password already generated.
+If you want another password with the same settings, click "Generate Password" again.  "Reset Settings" will revert the settings back to defaults (all character sets included with a length of 16).  I recommend using all character sets and a minimum of 16 characters, but you may go as low as 8 if you wish.
 
-![Deployed Page](./Assets/Images/deployedPage.png)
+The "Copy Password" button will copy the generated password to your clipboard so you can quickly paste it into the signup or password recovery form you are filling out.
 
 ## Technology
 
-Microsoft's VS Code was the programming platform. GitBash was used for version control for the repository. A GitHub repository was utilized for version control, as well as provide a streamlined deployment to GitHub Pages. Testing for bugs and functionality was performed using Chrome DevTools.
+- Vite.js
+- TypeScript
+- Tailwind
+
+## About Me
+
+I am Colin Marshall, a full-stack web developer based in the United States.  I am passionate about web development and am always searching for collaboration opportunities.  I can be contacted at cascade.colin@gmail.com or on [LinkedIn](https://www.linkedin.com/in/colin-p-marshall/).
 
 ## License
 
@@ -45,15 +34,3 @@ of this software and associated documentation files (the "Software"), to deal in
 The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
 
 THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
-
-## Badges
-
-![MIT License](https://img.shields.io/badge/License-MIT-brightgreen)
-
-![HTML](https://img.shields.io/badge/HTML-15%25-blue)
-
-![CSS](https://img.shields.io/badge/CSS-18.8%25-lightgrey)
-
-![JavaScript](https://img.shields.io/badge/JavaScript-66.2%25-yellow)
-
-![Made with love](https://img.shields.io/badge/Made%20With-Love-pink)
